@@ -1,0 +1,64 @@
+<html>
+<head>
+<script>
+
+document.addEventListener('keydown', (event) => {
+    const forbiddenKeys = ['F12', 'I', 'J', 'C', 'U'];
+    
+    if (
+        event.key === 'F12' || 
+        ((event.ctrlKey || event.metaKey) && event.shiftKey && forbiddenKeys.includes(event.key.toUpperCase())) ||
+        ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'U')
+    ) {
+        event.preventDefault();
+    }
+});
+
+  // Matikan klik kanan
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Matikan shortcut (Ctrl+U, Ctrl+Shift+I, F12)
+  document.onkeydown = function(e) {
+    if (e.keyCode == 123 || 
+       (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || 
+       (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+      return false;
+    }
+  }
+</script>
+</head>
+<body style="background-color: Black;">
+
+<div>	
+	<form onsubmit="event.preventDefault(); passwordCheck();" style="display: flex; gap: 10px;">
+		<label style="color: red;">Enter password:</label>
+		<input type="text" id="password" style="
+		background-color: red;
+		color			: black;"
+		required>
+		
+		<button type="submit" onclick="passwordCheck()" style="
+		background-color : red;
+		color		 	 : black;
+		border-radius    : 4px;"
+		>Submit</button>
+	</form>
+</div>	
+	<p id="error" style="color: red"></p>
+<script>
+function passwordCheck() {
+  var password      = document.getElementById("password").value;
+  var passwordBenar = "6194372850"
+  if (password == passwordBenar) {
+    window.location.href = "Message.html"; 
+	
+  } else if (password == "") {
+	document.getElementById("error").textContent = "Please input the password";
+	
+  } else {
+    document.getElementById("error").textContent = "Incorrect!";
+  }
+}
+</script>
+</body>
+</html>
